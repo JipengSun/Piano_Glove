@@ -118,9 +118,6 @@ static float adc_sample_blocking(uint8_t channel) {
   // TODO
 
   float voltage = (adc_counts/4095.0)*3.6;
-
-
-
   // return voltage measurement
   return voltage;
 }
