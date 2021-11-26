@@ -51,3 +51,7 @@ static void i2c_reg_write(uint8_t i2c_addr, uint8_t reg_addr, uint8_t data) {
   //return rx_buf;
 
 }
+
+void PCF8591_init(const nrf_twi_mngr_t* i2c){
+  i2c_reg_write(PCF8591_DEFAULT_ADDR,0,0x00);
+}

@@ -12,9 +12,8 @@
 
 #include "microbit_v2.h"
 
-
 #include "nrf_ADC.h"
-
+#include "adafruit_PCF8591.h"
 
 
 int main(void) {
