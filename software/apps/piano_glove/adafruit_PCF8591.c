@@ -24,25 +24,25 @@ void PCF8591_write(int channel){
     wr_buf = 0x00;
   }
   else if (channel == 1){
-    wr_buf = 0x04;
+    wr_buf = 0x01;
   }
   nrf_twi_mngr_transfer_t const read_transfer[] = {
     //TODO: implement me
-  NRF_TWI_MNGR_WRITE(PCF8591_DEFAULT_ADDR,&wr_buf,1,NRF_TWI_MNGR_NO_STOP),
+  NRF_TWI_MNGR_WRITE(PCF8591_DEFAULT_ADDR,&wr_buf,1,0),
   };
   int s = nrf_twi_mngr_perform(i2c_manager, NULL, read_transfer, 1, NULL);
 
 }
 
-int32_t PCF8591_read(){
-  int32_t rx_buf = 0;
+uint8_t PCF8591_read(){
+  uint8_t rx_buf[4] = {0};
   nrf_twi_mngr_transfer_t const read_transfer1[] = {
     //TODO: implement me
-    NRF_TWI_MNGR_READ(PCF8591_DEFAULT_ADDR,&rx_buf,4,0)
+    NRF_TWI_MNGR_READ(PCF8591_DEFAULT_ADDR,rx_buf,2,0)
   };
   int s1 = nrf_twi_mngr_perform(i2c_manager, NULL, read_transfer1, 1, NULL);
-  
-  return rx_buf;
+  //printf("0x%x 0x%x 0x%x 0x%x\n",rx_buf[0],rx_buf[1],rx_buf[2],rx_buf[3]);
+  return rx_buf[1];
 }
 
 void printBits(size_t const size, void const * const ptr)
@@ -62,14 +62,14 @@ void printBits(size_t const size, void const * const ptr)
 }
 
 void print_PCF_volatage(){
-  int32_t result;
+  uint8_t result;
   PCF8591_write(0);
   result = PCF8591_read();
-  //printf("The value of PCF ADC channel 1 is: %d\n",result);
-  printBits(sizeof(result),&result);
+  printf("The value of PCF ADC channel 1 is: %d\n",result);
+  //printBits(sizeof(result),&result);
 
   PCF8591_write(1);
   result = PCF8591_read();
-  //printf("The value of PCF ADC channel 2 is: %d\n",result);
-  printBits(sizeof(result),&result);
+  printf("The value of PCF ADC channel 2 is: %d\n",result);
+  //printBits(sizeof(result),&result);
 };
