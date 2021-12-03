@@ -29,9 +29,8 @@ int main(void) {
 
   printf("Board started!\n");
   // initialize ADC
-  adc_init();
   PCF8591_init(&twi_mngr_instance);
-
+  adc_init();
   // loop forever
   while (1) {
     // Don't put any code in here. Instead put periodic code in `sample_timer_callback()`

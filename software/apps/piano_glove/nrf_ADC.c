@@ -9,6 +9,8 @@
 #include "nrfx_saadc.h"
 #include "microbit_v2.h"
 #include "nrf_ADC.h"
+#include "adafruit_PCF8591.h"
+
 
 unsigned long ain_pins[] = {NRF_SAADC_INPUT_AIN0, NRF_SAADC_INPUT_AIN1,NRF_SAADC_INPUT_AIN2,NRF_SAADC_INPUT_AIN3};
 
@@ -21,6 +23,7 @@ static void sample_timer_callback(void* _unused) {
   // Do things periodically here
   // TODO
   print_flex_value();
+  print_PCF_volatage();
 }
 
 void adc_init() {
@@ -77,6 +80,4 @@ void print_flex_value(void){
     printf("Float Voltage of Channel %d: %f\n",i,fn1);
   }
   printf("\n");
-
-
 }
