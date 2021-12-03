@@ -114,21 +114,21 @@ void lsm303agr_init(const nrf_twi_mngr_t* i2c, const nrf_twi_mngr_t* i2c_1)
 
     // Reboot Motor Controller
     // LEFT
-    i2c_reg_write_1(DRV2605L_MOTOR_ADDRESS, MODE_REG, 0x03);
+    // i2c_reg_write_1(DRV2605L_MOTOR_ADDRESS, MODE_REG, 0x03);
+    // nrf_delay_ms(300); // needs delay to wait for reboot
+
+    // i2c_reg_write_1(DRV2605L_MOTOR_ADDRESS, STATUS_REG, 0x88);
+    // nrf_delay_ms(300);
+    // uint8_t result_1 = i2c_reg_read_1(DRV2605L_MOTOR_ADDRESS, MODE_REG);
+    // uint8_t result_2 = i2c_reg_read_1(DRV2605L_MOTOR_ADDRESS, STATUS_REG);
+    // printf("LEFT: Check MODE_REG of the Motor Controller: %d\n", result_1);
+    // printf("LEFT: Check STATUS_REG of the Motor Controller: %x\n", result_2);
+
+    // // MIDLLE
+    i2c_reg_write(DRV2605L_MOTOR_ADDRESS, MODE_REG, 0x02);
     nrf_delay_ms(300); // needs delay to wait for reboot
 
-    i2c_reg_write_1(DRV2605L_MOTOR_ADDRESS, STATUS_REG, 0x88);
-    nrf_delay_ms(300);
-    uint8_t result_1 = i2c_reg_read_1(DRV2605L_MOTOR_ADDRESS, MODE_REG);
-    uint8_t result_2 = i2c_reg_read_1(DRV2605L_MOTOR_ADDRESS, STATUS_REG);
-    printf("LEFT: Check MODE_REG of the Motor Controller: %d\n", result_1);
-    printf("LEFT: Check STATUS_REG of the Motor Controller: %x\n", result_2);
-
-    // MIDLLE
-    i2c_reg_write(DRV2605L_MOTOR_ADDRESS, MODE_REG, 0x03);
-    nrf_delay_ms(300); // needs delay to wait for reboot
-
-    i2c_reg_write(DRV2605L_MOTOR_ADDRESS, STATUS_REG, 0x88);
+    // i2c_reg_write(DRV2605L_MOTOR_ADDRESS, STATUS_REG, 0x88);
     nrf_delay_ms(300);
     uint8_t result_3 = i2c_reg_read(DRV2605L_MOTOR_ADDRESS, MODE_REG);
     uint8_t result_4 = i2c_reg_read(DRV2605L_MOTOR_ADDRESS, STATUS_REG);
@@ -136,7 +136,7 @@ void lsm303agr_init(const nrf_twi_mngr_t* i2c, const nrf_twi_mngr_t* i2c_1)
     printf("MIDDLE: Check STATUS_REG of the Motor Controller: %x\n", result_4);
 
     // // RIGHT
-    // i2c_reg_write(DRV2605L_MOTOR_ADDRESS, MODE_REG, 0x03);
+    // i2c_reg_write(DRV2605L_MOTOR_ADDRESS, MODE_REG, 0x02);
     // nrf_delay_ms(300); // needs delay to wait for reboot
 
     // i2c_reg_write(DRV2605L_MOTOR_ADDRESS, STATUS_REG, 0x88);
