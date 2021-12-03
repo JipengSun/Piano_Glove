@@ -52,7 +52,7 @@ void adc_init() {
   app_timer_create(&sample_timer, APP_TIMER_MODE_REPEATED, sample_timer_callback);
   // start timer
   // change the rate to whatever you want
-  app_timer_start(sample_timer, 32768, NULL);
+  app_timer_start(sample_timer, 62768, NULL);
 
 
 }
