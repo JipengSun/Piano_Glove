@@ -9,7 +9,6 @@
 #include "nrf_error.h"
 
 #include "adafruit_PCF8591.h"
-#include "nrf_delay.h"
 
 // Pointer to an initialized I2C instance to use for transactions
 static const nrf_twi_mngr_t* i2c_manager = NULL;

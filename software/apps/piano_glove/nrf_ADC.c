@@ -2,14 +2,11 @@
 #include <stdint.h>
 #include <stdio.h>
 
-
-#include "app_timer.h"
 #include "microbit_v2.h"
 
 #include "nrfx_saadc.h"
 #include "microbit_v2.h"
 #include "nrf_ADC.h"
-#include "adafruit_PCF8591.h"
 
 
 unsigned long ain_pins[] = {NRF_SAADC_INPUT_AIN0, NRF_SAADC_INPUT_AIN1,NRF_SAADC_INPUT_AIN2,NRF_SAADC_INPUT_AIN3};
@@ -17,13 +14,6 @@ unsigned long ain_pins[] = {NRF_SAADC_INPUT_AIN0, NRF_SAADC_INPUT_AIN1,NRF_SAADC
 void saadc_event_callback(nrfx_saadc_evt_t const* _unused) {
   // don't care about saadc events
   // ignore this function
-}
-
-static void sample_timer_callback(void* _unused) {
-  // Do things periodically here
-  // TODO
-  print_flex_value();
-  print_PCF_volatage();
 }
 
 void adc_init() {
@@ -43,17 +33,6 @@ void adc_init() {
   }
 
   APP_ERROR_CHECK(error_code);
-
-  // Global variables
-  APP_TIMER_DEF(sample_timer);
-
-  // initialize app timers
-  app_timer_init();
-  app_timer_create(&sample_timer, APP_TIMER_MODE_REPEATED, sample_timer_callback);
-  // start timer
-  // change the rate to whatever you want
-  app_timer_start(sample_timer, 62768, NULL);
-
 
 }
 
@@ -79,5 +58,4 @@ void print_flex_value(void){
     float fn1 = adc_sample_blocking(i);
     printf("Float Voltage of Channel %d: %f\n",i,fn1);
   }
-  printf("\n");
 }
