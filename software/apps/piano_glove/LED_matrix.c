@@ -87,5 +87,5 @@ void led_matrix_init(void)
 
     //app_timer_init();
     app_timer_create(&my_timer, APP_TIMER_MODE_REPEATED, led_write);
-    app_timer_start(my_timer, 50, NULL);
+    app_timer_start(my_timer, 100, NULL);
 }

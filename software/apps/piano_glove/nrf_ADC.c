@@ -11,6 +11,8 @@
 
 unsigned long ain_pins[] = {NRF_SAADC_INPUT_AIN0, NRF_SAADC_INPUT_AIN1,NRF_SAADC_INPUT_AIN2,NRF_SAADC_INPUT_AIN3};
 
+float Chip_Flex_Value[3] = {0.0,0.0,0.0};
+
 void saadc_event_callback(nrfx_saadc_evt_t const* _unused) {
   // don't care about saadc events
   // ignore this function
@@ -57,5 +59,12 @@ void print_flex_value(void){
   for(int i = 0; i < 3; i++){
     float fn1 = adc_sample_blocking(i);
     printf("Float Voltage of Channel %d: %f\n",i,fn1);
+  }
+}
+
+void update_flex_value(){
+  for(int i = 0; i < 3; i++){
+    float fn1 = adc_sample_blocking(i);
+    Chip_Flex_Value[i] = fn1;
   }
 }

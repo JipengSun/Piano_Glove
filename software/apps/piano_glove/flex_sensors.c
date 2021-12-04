@@ -15,10 +15,22 @@
 
 NRF_TWI_MNGR_DEF(twi_mngr_instance, 1, 0);
 
+extern float Chip_Flex_Value[];
+extern u_int8_t PCF_Channel_1_Value;
+extern u_int8_t PCF_Channel_2_Value;
+
+
 static void sample_timer_callback(void* _unused) {
   // Do things periodically here
-  print_flex_value();
-  print_PCF_volatage();
+  update_flex_value();
+  update_PCF_voltage();
+
+  // Print the value out
+  for(int i = 0; i <3; i++){
+    printf("NRF Channel %d: %f\n",i,Chip_Flex_Value[i]);
+  }
+  printf("PCF Channel 1: %d\n",PCF_Channel_1_Value);
+  printf("PCF Channel 2: %d\n",PCF_Channel_2_Value);
   printf("\n");
 }
 

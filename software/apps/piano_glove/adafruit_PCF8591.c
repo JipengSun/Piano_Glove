@@ -12,6 +12,8 @@
 
 // Pointer to an initialized I2C instance to use for transactions
 static const nrf_twi_mngr_t* i2c_manager = NULL;
+uint8_t PCF_Channel_1_Value = 0;
+uint8_t PCF_Channel_2_Value = 0;
 
 void PCF8591_init(const nrf_twi_mngr_t* i2c){
   i2c_manager = i2c;
@@ -29,7 +31,7 @@ void PCF8591_write(int channel){
     //TODO: implement me
   NRF_TWI_MNGR_WRITE(PCF8591_DEFAULT_ADDR,&wr_buf,1,0),
   };
-  int s = nrf_twi_mngr_perform(i2c_manager, NULL, read_transfer, 1, NULL);
+  nrf_twi_mngr_perform(i2c_manager, NULL, read_transfer, 1, NULL);
 
 }
 
@@ -39,7 +41,7 @@ uint8_t PCF8591_read(){
     //TODO: implement me
     NRF_TWI_MNGR_READ(PCF8591_DEFAULT_ADDR,rx_buf,2,0)
   };
-  int s1 = nrf_twi_mngr_perform(i2c_manager, NULL, read_transfer1, 1, NULL);
+  nrf_twi_mngr_perform(i2c_manager, NULL, read_transfer1, 1, NULL);
   //printf("0x%x 0x%x 0x%x 0x%x\n",rx_buf[0],rx_buf[1],rx_buf[2],rx_buf[3]);
   return rx_buf[1];
 }
@@ -72,3 +74,10 @@ void print_PCF_volatage(){
   printf("The value of PCF ADC channel 2 is: %d\n",result);
   //printBits(sizeof(result),&result);
 };
+
+void update_PCF_voltage(){
+  PCF8591_write(0);
+  PCF_Channel_1_Value = PCF8591_read();
+  PCF8591_write(1);
+  PCF_Channel_2_Value = PCF8591_read();
+}
