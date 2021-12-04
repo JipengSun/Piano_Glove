@@ -6,7 +6,6 @@
 #include <string.h>
 
 APP_TIMER_DEF(my_timer);
-APP_TIMER_DEF(your_timer);
 
 static uint32_t led_states[5][5] = { { 0, 0, 0, 0, 0 },
     { 0, 0, 0, 0, 0 },
@@ -21,19 +20,8 @@ int index1 = 0;
 char* my_string;
 // char* my_char;
 char* my_new_string;
-char* charValue;
-static int str_counter = 0;
-bool repeated;
+char charValue;
 
-void get_string(char* input, bool set)
-{
-    str_counter = 0;
-    repeated = set;
-    my_string = input;
-    // app_timer_start(your_timer, 45954, NULL);
-    printf("%d\n", repeated);
-    printf("%s\n", my_string);
-}
 
 void display_char(char my_char)
 {
@@ -48,42 +36,22 @@ void display_char(char my_char)
     }
 }
 
-void display_str(void)
-{
-    int index = str_counter;
-    if (repeated) {
-        printf("%d\n", repeated);
-        index = (index) % strlen(my_string);
-        display_char(my_string[index]);
-        str_counter = str_counter + 1;
-    } else {
-        if (index != (int)strlen(my_string)) {
-            display_char(my_string[index]);
-            str_counter = str_counter + 1;
-        }
-    }
-}
-
 void LED_display(int my_char)
 {
     // led_write();
     printf("In LED_display, the showing number is %d \n", my_char);
-    charValue = (char*)(my_char + '0');
+    
+    //charValue = (char*)(my_char + '0');
     if (my_char == 8) {
         charValue = 'L';
     } else if (my_char == 9) {
         charValue = 'R';
+    } else{
+        sprintf(&charValue, "%d", my_char);
+
     }
-
-    size_t len = strlen(my_string);
-
-    my_new_string = (char*)malloc(len + 1 + 1);
-
-    strcpy(my_new_string, my_string);
-    my_new_string[len] = charValue;
-    my_new_string[len + 1] = '\0';
-    my_string = my_new_string;
-    printf("In LED_display, the showing number is char:::%s \n", my_string);
+    display_char(charValue);
+    printf("In LED_display, the showing number is char:::%s \n", &charValue);
 }
 
 void led_write()
@@ -127,7 +95,4 @@ void led_matrix_init(void)
     app_timer_init();
     app_timer_create(&my_timer, APP_TIMER_MODE_REPEATED, led_write);
     app_timer_start(my_timer, 20, NULL);
-
-    app_timer_create(&your_timer, APP_TIMER_MODE_REPEATED, (void*)display_str);
-    app_timer_start(your_timer, 45954, NULL);
 }
