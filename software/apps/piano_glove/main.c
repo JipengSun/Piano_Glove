@@ -1,6 +1,4 @@
 // Breadboard example app
-//
-// Read from multiple analog sensors and control an RGB LED
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -9,7 +7,11 @@
 
 #include "nrf_delay.h"
 #include "flex_sensors.h"
+#include "LED_matrix.h"
+#include "vibrators.h"
 
+int SCORE[] = {3,3,5,6,9,1,1,8,6,5,5,6,5};
+int score_length = sizeof(SCORE) /sizeof(SCORE[0]);
 
 int main(void) {
   // Initialize I2C peripheral and driver
@@ -17,8 +19,15 @@ int main(void) {
   // initialize ADC
   flex_sensors_init();
   // loop forever
+
   while (1) {
     nrf_delay_ms(1000);
+    printf("The length of the score is: %d\n",score_length);
+    for(int i = 0; i < score_length; i++){
+      LED_display(SCORE[i]);
+      motor_vibrate(SCORE[i]);
+      wait_right_flex_signal(SCORE[i]);
+    }
   }
 }
 

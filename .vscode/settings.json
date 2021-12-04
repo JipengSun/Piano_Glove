@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "lsm303agr.h": "c"
+        "lsm303agr.h": "c",
+        "stdbool.h": "c",
+        "stdint.h": "c"
     }
 }
