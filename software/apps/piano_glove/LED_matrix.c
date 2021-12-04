@@ -17,9 +17,6 @@ static uint32_t row_num[5] = { LED_ROW1, LED_ROW2, LED_ROW3, LED_ROW4, LED_ROW5 
 static uint32_t col_num[5] = { LED_COL1, LED_COL2, LED_COL3, LED_COL4, LED_COL5 };
 
 int index1 = 0;
-char* my_string;
-// char* my_char;
-char* my_new_string;
 char charValue;
 
 
@@ -38,10 +35,6 @@ void display_char(char my_char)
 
 void LED_display(int my_char)
 {
-    // led_write();
-    printf("In LED_display, the showing number is %d \n", my_char);
-    
-    //charValue = (char*)(my_char + '0');
     if (my_char == 8) {
         charValue = 'L';
     } else if (my_char == 9) {
@@ -51,7 +44,7 @@ void LED_display(int my_char)
 
     }
     display_char(charValue);
-    printf("In LED_display, the showing number is char:::%s \n", &charValue);
+    //printf("In LED_display, the showing number is char:::%s \n", &charValue);
 }
 
 void led_write()
@@ -92,7 +85,7 @@ void led_matrix_init(void)
     nrf_gpio_pin_set(LED_COL4);
     nrf_gpio_pin_set(LED_COL5);
 
-    app_timer_init();
+    //app_timer_init();
     app_timer_create(&my_timer, APP_TIMER_MODE_REPEATED, led_write);
-    app_timer_start(my_timer, 20, NULL);
+    app_timer_start(my_timer, 50, NULL);
 }

@@ -21,7 +21,6 @@ int main(void) {
   flex_sensors_init();
 
   led_matrix_init();
-  //get_string("S", 0);
 
   // loop forever
   while (1) {

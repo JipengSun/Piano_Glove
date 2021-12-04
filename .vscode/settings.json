@@ -2,6 +2,7 @@
     "files.associations": {
         "lsm303agr.h": "c",
         "stdbool.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "app_timer.h": "c"
     }
 }
