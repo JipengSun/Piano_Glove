@@ -21,7 +21,7 @@ int main(void) {
   flex_sensors_init();
 
   led_matrix_init();
-  get_string("Welcome!", 0);
+  get_string("S", 0);
   nrf_delay_ms(1000);
 
   // loop forever

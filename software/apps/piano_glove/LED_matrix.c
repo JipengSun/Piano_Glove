@@ -68,24 +68,22 @@ void LED_display(int my_char)
 {
     // led_write();
     printf("In LED_display, the showing number is %d \n", my_char);
-    *charValue = my_char + '0';
+    charValue = (char*)(my_char + '0');
     if (my_char == 8) {
-        *charValue = 'L';
+        charValue = 'L';
     } else if (my_char == 9) {
-        *charValue = 'R';
+        charValue = 'R';
     }
-    // printf("In LED_display, the showing number is char:::%c \n", charValue);
-    // app_timer_create(&your_timer_2, APP_TIMER_MODE_REPEATED, display_char);
-    // app_timer_start(your_timer, 45954, NULL);
+
     size_t len = strlen(my_string);
 
     my_new_string = (char*)malloc(len + 1 + 1);
 
     strcpy(my_new_string, my_string);
-    my_new_string[len] = *charValue;
+    my_new_string[len] = charValue;
     my_new_string[len + 1] = '\0';
     my_string = my_new_string;
-    // printf("In LED_display, the showing number is char:::%s \n", my_string);
+    printf("In LED_display, the showing number is char:::%s \n", my_string);
 }
 
 void led_write()
