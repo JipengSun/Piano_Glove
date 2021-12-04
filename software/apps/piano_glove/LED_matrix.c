@@ -2,24 +2,24 @@
 #include "app_timer.h"
 #include "font.h"
 #include "microbit_v2.h"
+#include <stdlib.h>
+#include <string.h>
 
 APP_TIMER_DEF(my_timer);
 APP_TIMER_DEF(your_timer);
-APP_TIMER_DEF(your_timer_2);
-static int counter = 0;
 
-static uint32_t led_states[5][5] = { { 1, 0, 0, 0, 1 },
-    { 0, 1, 0, 1, 0 },
-    { 0, 0, 1, 0, 0 },
-    { 0, 1, 0, 1, 0 },
-    { 1, 0, 0, 0, 1 } };
+static uint32_t led_states[5][5] = { { 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0 } };
 
 static uint32_t row_num[5] = { LED_ROW1, LED_ROW2, LED_ROW3, LED_ROW4, LED_ROW5 };
 static uint32_t col_num[5] = { LED_COL1, LED_COL2, LED_COL3, LED_COL4, LED_COL5 };
 
 int index1 = 0;
 char* my_string;
-char* my_char;
+// char* my_char;
 char* my_new_string;
 char* charValue;
 static int str_counter = 0;
@@ -57,7 +57,7 @@ void display_str(void)
         display_char(my_string[index]);
         str_counter = str_counter + 1;
     } else {
-        if (index != strlen(my_string)) {
+        if (index != (int)strlen(my_string)) {
             display_char(my_string[index]);
             str_counter = str_counter + 1;
         }
@@ -68,25 +68,24 @@ void LED_display(int my_char)
 {
     // led_write();
     printf("In LED_display, the showing number is %d \n", my_char);
-    charValue = my_char + '0';
+    *charValue = my_char + '0';
     if (my_char == 8) {
-        charValue = 'L';
+        *charValue = 'L';
     } else if (my_char == 9) {
-        charValue = 'R';
+        *charValue = 'R';
     }
-    printf("In LED_display, the showing number is char:::%c \n", charValue);
+    // printf("In LED_display, the showing number is char:::%c \n", charValue);
     // app_timer_create(&your_timer_2, APP_TIMER_MODE_REPEATED, display_char);
     // app_timer_start(your_timer, 45954, NULL);
     size_t len = strlen(my_string);
 
-    /* one for extra char, one for trailing zero */
-    my_new_string = malloc(len + 1 + 1);
+    my_new_string = (char*)malloc(len + 1 + 1);
 
     strcpy(my_new_string, my_string);
-    my_new_string[len] = charValue;
+    my_new_string[len] = *charValue;
     my_new_string[len + 1] = '\0';
     my_string = my_new_string;
-    printf("In LED_display, the showing number is char:::%s \n", my_string);
+    // printf("In LED_display, the showing number is char:::%s \n", my_string);
 }
 
 void led_write()
@@ -131,6 +130,6 @@ void led_matrix_init(void)
     app_timer_create(&my_timer, APP_TIMER_MODE_REPEATED, led_write);
     app_timer_start(my_timer, 20, NULL);
 
-    app_timer_create(&your_timer, APP_TIMER_MODE_REPEATED, display_str);
+    app_timer_create(&your_timer, APP_TIMER_MODE_REPEATED, (void*)display_str);
     app_timer_start(your_timer, 45954, NULL);
 }
