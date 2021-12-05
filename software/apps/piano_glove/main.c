@@ -10,8 +10,11 @@
 #include "LED_matrix.h"
 #include "vibrators.h"
 
-int SCORE[] = {5,6,3,3,5,6,9,1,1,8,6,5,5,6,5};
-//int SCORE[] = { 3, 8, 9 };
+#include "microbit_v2.h"
+#include "nrf_twi_mngr.h"
+
+int SCORE[] = { 5, 6, 3, 3, 5, 6, 9, 1, 1, 8, 6, 5, 5, 6, 5 };
+// int SCORE[] = { 3, 8, 9 };
 int score_length = sizeof(SCORE) /sizeof(SCORE[0]);
 
 int main(void) {
