@@ -11,6 +11,7 @@
 
 #include "adafruit_PCF8591.h"
 #include "nrf_ADC.h"
+#include "vibrators.h"
 
 #include "app_timer.h"
 
@@ -49,6 +50,8 @@ void flex_sensors_init(){
 
   adc_init();
   PCF8591_init(&twi_mngr_instance);
+  drv2605l_init(&twi_mngr_instance);
+
 
   // Global variables
   APP_TIMER_DEF(sample_timer);

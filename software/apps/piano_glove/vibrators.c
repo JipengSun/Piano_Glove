@@ -8,6 +8,8 @@
 #include <math.h>
 #include <stdio.h>
 
+static const nrf_twi_mngr_t* i2c_manager = NULL;
+
 void motor_vibrate(int number){
     nrf_gpio_cfg_output(EDGE_P15);
     nrf_gpio_pin_clear(EDGE_P15);
@@ -21,7 +23,7 @@ void motor_vibrate(int number){
 }
 
 // Pointer to an initialized I2C instance to use for transactions
-static const nrf_twi_mngr_t* i2c_manager = NULL;
+//static const nrf_twi_mngr_t* i2c_manager = NULL;
 
 // Helper function to perform a 1-byte I2C read of a given register
 //
