@@ -4,6 +4,7 @@
 
 #include "nrf_error.h"
 #include "microbit_v2.h"
+#include "nrf_delay.h"
 
 #include "nrfx_saadc.h"
 #include "nrf_twi_mngr.h"
@@ -18,6 +19,10 @@ NRF_TWI_MNGR_DEF(twi_mngr_instance, 1, 0);
 extern float Chip_Flex_Value[];
 extern u_int8_t PCF_Channel_1_Value;
 extern u_int8_t PCF_Channel_2_Value;
+
+
+volatile int trigger_states[5] = {0};
+const float trigger_threshold[5] = {3.3,3.3,3.3,120,120};
 
 
 static void sample_timer_callback(void* _unused) {
@@ -57,9 +62,36 @@ void flex_sensors_init(){
 
 };
 
-void wait_right_flex_signal(int number){
-    
+void update_trigger_states(){
+  float flex_values[5] = {Chip_Flex_Value[0],Chip_Flex_Value[1],Chip_Flex_Value[2],(float)PCF_Channel_1_Value,(float)PCF_Channel_2_Value};
+  for(int i = 0; i < 5; i++){
+    if(flex_values[i] >= trigger_threshold[i]){
+      trigger_states[i] = 1;
+      printf("Channel % d triggered with value %f\n",i,flex_values[i]);
+    }
+    else{
+      trigger_states[i] = 0;
+    }
+  }
 
+
+}
+
+void wait_right_flex_signal(int number){
+  if(number > 7){
+    printf("Move left or right.\n");
+    nrf_delay_ms(2000);
+  }
+  else if (number > 5){
+    number = 5;
+  } else{
+    update_trigger_states();
+    while(trigger_states[number-1]!=1){
+      nrf_delay_ms(200);
+      update_trigger_states();
+    }
+    printf("Finger %d Triggered!\n", number);
+  }
 };
 
 
