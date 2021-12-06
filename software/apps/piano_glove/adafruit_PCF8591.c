@@ -12,8 +12,8 @@
 
 // Pointer to an initialized I2C instance to use for transactions
 static const nrf_twi_mngr_t* i2c_manager = NULL;
-uint8_t PCF_Channel_1_Value = 0;
-uint8_t PCF_Channel_2_Value = 0;
+uint8_t PCF_Channel_1_Value = 255;
+uint8_t PCF_Channel_2_Value = 255;
 
 void PCF8591_init(const nrf_twi_mngr_t* i2c){
   i2c_manager = i2c;

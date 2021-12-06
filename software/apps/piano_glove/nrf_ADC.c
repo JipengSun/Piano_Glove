@@ -11,7 +11,7 @@
 
 unsigned long ain_pins[] = {NRF_SAADC_INPUT_AIN0, NRF_SAADC_INPUT_AIN1,NRF_SAADC_INPUT_AIN2,NRF_SAADC_INPUT_AIN3};
 
-float Chip_Flex_Value[3] = {0.0,0.0,0.0};
+float Chip_Flex_Value[3] = {3.3,3.3,3.3};
 
 void saadc_event_callback(nrfx_saadc_evt_t const* _unused) {
   // don't care about saadc events

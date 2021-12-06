@@ -23,7 +23,7 @@ extern u_int8_t PCF_Channel_2_Value;
 
 
 volatile int trigger_states[5] = {0};
-const float trigger_threshold[5] = {3.3,3.3,3.3,120,120};
+const float trigger_threshold[5] = {2.0,2.0,2.0,150,150};
 
 
 static void sample_timer_callback(void* _unused) {
@@ -68,7 +68,7 @@ void flex_sensors_init(){
 void update_trigger_states(){
   float flex_values[5] = {Chip_Flex_Value[0],Chip_Flex_Value[1],Chip_Flex_Value[2],(float)PCF_Channel_1_Value,(float)PCF_Channel_2_Value};
   for(int i = 0; i < 5; i++){
-    if(flex_values[i] >= trigger_threshold[i]){
+    if(flex_values[i] <= trigger_threshold[i]){
       trigger_states[i] = 1;
       printf("Channel % d triggered with value %f\n",i,flex_values[i]);
     }
