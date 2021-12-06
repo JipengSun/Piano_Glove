@@ -9,8 +9,10 @@
 #include <stdio.h>
 
 static const nrf_twi_mngr_t* i2c_manager = NULL;
-static int prev_number = 0;
-void motor_vibrate(int number){
+static int prev_number_1 = 0;
+
+void motor_vibrate(int number)
+{
     nrf_gpio_cfg_output(EDGE_P15);
     nrf_gpio_pin_clear(EDGE_P15);
     nrf_gpio_cfg_output(EDGE_P14);
@@ -19,11 +21,11 @@ void motor_vibrate(int number){
         nrf_gpio_pin_set(EDGE_P15);
     } else if (number == 9) {
         nrf_gpio_pin_set(EDGE_P14);
-    } else if (prev_number == number)
+    } else if (prev_number_1 == number) {
         nrf_gpio_pin_set(EDGE_P14);
-    nrf_gpio_pin_set(EDGE_P15);
-}
-prev_number = number;
+        nrf_gpio_pin_set(EDGE_P15);
+    }
+    prev_number_1 = number;
 }
 
 // Pointer to an initialized I2C instance to use for transactions
