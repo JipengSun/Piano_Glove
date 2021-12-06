@@ -33,7 +33,7 @@ int main(void) {
       LED_display(SCORE[i]);
       motor_vibrate(SCORE[i]);
       wait_right_flex_signal(SCORE[i]);
-      nrf_delay_ms(2000);
+      // nrf_delay_ms(2000);
     }
   }
 }
