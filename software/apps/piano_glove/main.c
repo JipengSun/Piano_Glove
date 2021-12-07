@@ -9,15 +9,22 @@
 #include "flex_sensors.h"
 #include "LED_matrix.h"
 #include "vibrators.h"
+#include "app_button.h"
+//#include "song_selection.h"
 
 #include "microbit_v2.h"
 #include "nrf_twi_mngr.h"
 
-int SCORE[] = { 5, 6, 3, 3, 5, 6, 9, 1, 1, 8, 6, 5, 5, 6, 5 };
+int SCORE[];
 // int SCORE[] = { 3, 8, 9 };
-int score_length = sizeof(SCORE) /sizeof(SCORE[0]);
+int score_length;
 
 void song_selection(){
+  char song_name[] = "Jasmine";
+  display_string(song_name);
+  int testSCORE[] = { 5, 6, 3, 3, 5, 6, 9, 1, 1, 8, 6, 5, 5, 6, 5 };
+  memcpy(SCORE,testSCORE,sizeof(testSCORE));
+  score_length = sizeof(testSCORE) /sizeof(testSCORE[0]);
   wait_confirm();
   char message[] = "OK";
   display_string(message);
@@ -31,8 +38,8 @@ int main(void) {
 
   led_matrix_init();
 
-  char song_name[] = "Jasmine";
-  display_string(song_name);
+  //button_init();
+
   song_selection();
 
   // loop forever
@@ -45,6 +52,8 @@ int main(void) {
       nrf_delay_ms(1000);
       wait_right_flex_signal(SCORE[i]);
     }
+    char finish_message[] = "Good!";
+    display_string(finish_message);
   }
 }
 

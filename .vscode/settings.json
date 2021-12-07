@@ -3,6 +3,9 @@
         "lsm303agr.h": "c",
         "stdbool.h": "c",
         "stdint.h": "c",
-        "app_timer.h": "c"
+        "app_timer.h": "c",
+        "app_button.h": "c",
+        "nrf_gpio.h": "c",
+        "led_matrix.h": "c"
     }
 }

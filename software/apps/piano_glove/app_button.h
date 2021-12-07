@@ -67,7 +67,7 @@
 #include <stdbool.h>
 #include "nrf.h"
 #include "app_error.h"
-  
+#include "nrf_gpio.h"
 
 #ifdef __cplusplus
 extern "C" {

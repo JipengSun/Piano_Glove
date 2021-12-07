@@ -105,7 +105,7 @@ void wait_confirm(){
     for(int i = 0; i < 5; i++){
       sum += trigger_states[i];
     }
-    if (sum > 5){
+    if (sum > 1){
       confirm = true;
     }
     nrf_delay_ms(200);
