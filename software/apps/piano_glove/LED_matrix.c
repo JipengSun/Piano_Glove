@@ -4,6 +4,7 @@
 #include "microbit_v2.h"
 #include <stdlib.h>
 #include <string.h>
+#include "nrf_delay.h"
 
 APP_TIMER_DEF(my_timer);
 
@@ -56,6 +57,13 @@ void led_write()
         nrf_gpio_pin_write(col_num[i], !led_states[index1][i]);
     }
     nrf_gpio_pin_write(row_num[index1], 1);
+}
+
+void display_string(char* mystring){
+    for(int i = 0; i< strlen(mystring);i++){
+        display_char(mystring[i]);
+        nrf_delay_ms(500);
+    }
 }
 
 void led_matrix_init(void)

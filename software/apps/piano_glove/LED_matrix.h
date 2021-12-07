@@ -4,3 +4,4 @@
 
 void led_matrix_init(void);
 void LED_display(int my_char);
+void display_string(char* mystring);

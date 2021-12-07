@@ -97,4 +97,19 @@ void wait_right_flex_signal(int number){
   }
 };
 
+void wait_confirm(){
+  bool confirm = false;
+  while(!confirm){
+    update_trigger_states();
+    int sum = 0;
+    for(int i = 0; i < 5; i++){
+      sum += trigger_states[i];
+    }
+    if (sum > 5){
+      confirm = true;
+    }
+    nrf_delay_ms(200);
+  }
+}
+
 
