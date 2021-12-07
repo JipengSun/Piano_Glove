@@ -25,7 +25,6 @@ extern u_int8_t PCF_Channel_2_Value;
 volatile int trigger_states[5] = {0};
 const float trigger_threshold[5] = {2.0,2.0,2.0,150,150};
 
-
 static void sample_timer_callback(void* _unused) {
   // Do things periodically here
   update_flex_value();
@@ -83,7 +82,7 @@ void update_trigger_states(){
 void wait_right_flex_signal(int number){
   if(number > 7){
     printf("Move left or right.\n");
-    nrf_delay_ms(2000);
+    nrf_delay_ms(1000);
   }
   else if (number > 5){
     number = 5;

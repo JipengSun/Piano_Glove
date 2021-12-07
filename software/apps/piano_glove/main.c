@@ -20,9 +20,18 @@ int SCORE[];
 int score_length;
 
 void song_selection(){
-  char song_name[] = "Jasmine";
+
+  // char song_name[] = "Jasmine";
+  // int testSCORE[] = { 5, 6, 3, 3, 5, 6, 9, 1, 1, 8, 6, 5, 5, 6, 5 };
+
+  // char song_name[] = "Happy Birthday";
+  // int testSCORE[] = { 8,5,5,6,5,9,1,8,7,5,5,6,5,9,2,1};
+
+   char song_name[] = "Shape of You";
+   int testSCORE[] = { 1,2,3,2,1,1,2,2,6,2,1,1,2,6};
+
+
   display_string(song_name);
-  int testSCORE[] = { 5, 6, 3, 3, 5, 6, 9, 1, 1, 8, 6, 5, 5, 6, 5 };
   memcpy(SCORE,testSCORE,sizeof(testSCORE));
   score_length = sizeof(testSCORE) /sizeof(testSCORE[0]);
   wait_confirm();
@@ -49,7 +58,7 @@ int main(void) {
     for(int i = 0; i < score_length; i++){
       LED_display(SCORE[i]);
       motor_vibrate(SCORE[i]);
-      nrf_delay_ms(1000);
+      //nrf_delay_ms(500);
       wait_right_flex_signal(SCORE[i]);
     }
     char finish_message[] = "Good!";
