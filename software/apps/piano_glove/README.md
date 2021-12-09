@@ -1,5 +1,5 @@
 # Piano Glove
-
+The github repo link of the project is https://github.com/JipengSun/Piano_Glove
 ## Current Version
 Hi, this is the Piano Glove Project invented by Jipeng Sun and Yan Xu from Northwestern! The project is developed in and supported by Prof. Branden Ghena's CE346 Microprocessor System Design.
 
